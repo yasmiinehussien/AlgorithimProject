@@ -1,0 +1,114 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\yasmine\\Downloads\\[3] IMAGE SEGMENTATION-20250430T153848Z-001\\[3] IMAGE SEGMENTATION\\STARTUP CODE\\[TEMPLATE] ImageSegmentation\\[TEMPLATE] ImageSegmentation\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|c:\\users\\yasmine\\downloads\\[3] image segmentation-20250430t153848z-001\\[3] image segmentation\\startup code\\[template] imagesegmentation\\[template] imagesegmentation\\imagesegmentation\\imageoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|solutionrelative:imagesegmentation\\imageoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|C:\\Users\\yasmine\\Downloads\\[3] IMAGE SEGMENTATION-20250430T153848Z-001\\[3] IMAGE SEGMENTATION\\STARTUP CODE\\[TEMPLATE] ImageSegmentation\\[TEMPLATE] ImageSegmentation\\imagesegmentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|solutionrelative:imagesegmentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|C:\\Users\\yasmine\\Downloads\\[3] IMAGE SEGMENTATION-20250430T153848Z-001\\[3] IMAGE SEGMENTATION\\STARTUP CODE\\[TEMPLATE] ImageSegmentation\\[TEMPLATE] ImageSegmentation\\imagesegmentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|solutionrelative:imagesegmentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|C:\\Users\\yasmine\\Downloads\\[3] IMAGE SEGMENTATION-20250430T153848Z-001\\[3] IMAGE SEGMENTATION\\STARTUP CODE\\[TEMPLATE] ImageSegmentation\\[TEMPLATE] ImageSegmentation\\imagesegmentation\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|solutionrelative:imagesegmentation\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|C:\\Users\\yasmine\\Downloads\\[3] IMAGE SEGMENTATION-20250430T153848Z-001\\[3] IMAGE SEGMENTATION\\STARTUP CODE\\[TEMPLATE] ImageSegmentation\\[TEMPLATE] ImageSegmentation\\imagesegmentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|solutionrelative:imagesegmentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "C:\\Users\\yasmine\\Downloads\\[3] IMAGE SEGMENTATION-20250430T153848Z-001\\[3] IMAGE SEGMENTATION\\STARTUP CODE\\[TEMPLATE] ImageSegmentation\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\MainForm.cs",
+              "RelativeDocumentMoniker": "ImageSegmentation\\MainForm.cs",
+              "ToolTip": "C:\\Users\\yasmine\\Downloads\\[3] IMAGE SEGMENTATION-20250430T153848Z-001\\[3] IMAGE SEGMENTATION\\STARTUP CODE\\[TEMPLATE] ImageSegmentation\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\MainForm.cs",
+              "RelativeToolTip": "ImageSegmentation\\MainForm.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAcwB8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T20:18:28.912Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\yasmine\\Downloads\\[3] IMAGE SEGMENTATION-20250430T153848Z-001\\[3] IMAGE SEGMENTATION\\STARTUP CODE\\[TEMPLATE] ImageSegmentation\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\MainForm.Designer.cs",
+              "RelativeDocumentMoniker": "ImageSegmentation\\MainForm.Designer.cs",
+              "ToolTip": "C:\\Users\\yasmine\\Downloads\\[3] IMAGE SEGMENTATION-20250430T153848Z-001\\[3] IMAGE SEGMENTATION\\STARTUP CODE\\[TEMPLATE] ImageSegmentation\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\MainForm.Designer.cs",
+              "RelativeToolTip": "ImageSegmentation\\MainForm.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T20:13:14.293Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\yasmine\\Downloads\\[3] IMAGE SEGMENTATION-20250430T153848Z-001\\[3] IMAGE SEGMENTATION\\STARTUP CODE\\[TEMPLATE] ImageSegmentation\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\Program.cs",
+              "RelativeDocumentMoniker": "ImageSegmentation\\Program.cs",
+              "ToolTip": "C:\\Users\\yasmine\\Downloads\\[3] IMAGE SEGMENTATION-20250430T153848Z-001\\[3] IMAGE SEGMENTATION\\STARTUP CODE\\[TEMPLATE] ImageSegmentation\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\Program.cs",
+              "RelativeToolTip": "ImageSegmentation\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T16:48:55.703Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainForm.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\yasmine\\Downloads\\[3] IMAGE SEGMENTATION-20250430T153848Z-001\\[3] IMAGE SEGMENTATION\\STARTUP CODE\\[TEMPLATE] ImageSegmentation\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\MainForm.cs",
+              "RelativeDocumentMoniker": "ImageSegmentation\\MainForm.cs",
+              "ToolTip": "C:\\Users\\yasmine\\Downloads\\[3] IMAGE SEGMENTATION-20250430T153848Z-001\\[3] IMAGE SEGMENTATION\\STARTUP CODE\\[TEMPLATE] ImageSegmentation\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\MainForm.cs [Design]",
+              "RelativeToolTip": "ImageSegmentation\\MainForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T16:48:50.959Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ImageOperations.cs",
+              "DocumentMoniker": "C:\\Users\\yasmine\\Downloads\\[3] IMAGE SEGMENTATION-20250430T153848Z-001\\[3] IMAGE SEGMENTATION\\STARTUP CODE\\[TEMPLATE] ImageSegmentation\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\ImageOperations.cs",
+              "RelativeDocumentMoniker": "ImageSegmentation\\ImageOperations.cs",
+              "ToolTip": "C:\\Users\\yasmine\\Downloads\\[3] IMAGE SEGMENTATION-20250430T153848Z-001\\[3] IMAGE SEGMENTATION\\STARTUP CODE\\[TEMPLATE] ImageSegmentation\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\ImageOperations.cs",
+              "RelativeToolTip": "ImageSegmentation\\ImageOperations.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAowLMBAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T16:48:10.636Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

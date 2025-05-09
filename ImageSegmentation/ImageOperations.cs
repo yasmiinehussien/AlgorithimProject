@@ -4,6 +4,10 @@ using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
+using System.Runtime.CompilerServices;
+using System.Security;
+using System.Xml.Schema;
+using System.Collections.Specialized;
 
 ///Algorithms Project
 ///Intelligent Scissors
@@ -33,7 +37,7 @@ namespace ImageTemplate
         {
             XEdge1 = x1;
             YEdge1 = y1;
-            XEdge2 = x2; 
+            XEdge2 = x2;
             YEdge2 = y2;
             this.weight = weight;
         }
@@ -45,6 +49,181 @@ namespace ImageTemplate
     /// <summary>
     /// Library of static functions that deal with images
     /// </summary>
+    /// 
+
+    public class DSU
+    {
+        public int lenght;
+        public int width;
+        public double k;
+        public List<Tuple<double, int, int>> list = new List<Tuple<double, int, int>>();
+        public int[] head;
+        public int[] comp_size;
+        public double[] internal_diff; // maximum edge in the compounent
+
+
+        public DSU(double par, int n, int m, List<Tuple<double, int, int>> ls)
+        {
+            k = par;
+            lenght = n;
+            width = m;
+            list = ls;
+            head = new int[n * m];
+            comp_size = new int[n * m];
+            internal_diff = new double[n * m];
+            for (int i = 0; i < n * m; i++)
+            {
+                head[i] = i;
+                comp_size[i] = 1;
+                internal_diff[i] = 0;
+            }
+        }
+        public int find_head(int node) // log (n*m)
+        {
+            if (head[node] == node) return node;
+            return head[node] = find_head(head[node]);
+        }
+        public void merge(double weight, int v1, int v2)
+        {
+
+            int head1 = find_head(v1);
+            int head2 = find_head(v2);
+            if (head1 == head2) return;
+            if (comp_size[head2] > comp_size[head1])
+            {
+                int x = head1;
+                head1 = head2;
+                head2 = x;
+            }
+
+            double thr1 = k / comp_size[head1];
+            double thr2 = k / comp_size[head2];
+            if (weight > Math.Min(thr1 + internal_diff[head1], thr2 + internal_diff[head2])) return;
+            // head1 > head2
+            head[head2] = head1;
+            comp_size[head1] += comp_size[head2];
+            internal_diff[head1] = weight; // sorted
+        }
+
+        public void run_DSU()
+        {
+            int sz = list.Count;
+            for (int i = 0; i < sz; i++)
+            {
+                merge(list[i].Item1, list[i].Item2, list[i].Item3);
+            }
+            for (int i = 0; i < width * lenght; i++)
+            {
+                head[i] = find_head(i);
+            }
+        }
+
+
+    }
+
+    public class Get_Intersection
+    {
+        public int length;
+        public int width;
+        public int[] head_red, head_green, head_blue;
+        public int[] union;
+        public int[] size_of_comp;
+
+        public Get_Intersection(int n, int m, int[] head_red, int[] head_green, int[] head_blue)
+        {
+            this.length = n;
+            this.width = m;
+            this.head_red = head_red;
+            this.head_green = head_green;
+            this.head_blue = head_blue;
+            union = new int[n * m];
+            size_of_comp = new int[n * m];
+            for (int i = 0; i < n * m; i++)
+            {
+                union[i] = i;
+                size_of_comp[i] = 0;
+            }
+        }
+        public int find_head2(int node) // log (n*m)
+        {
+            if (union[node] == node) return node;
+            return union[node] = find_head2(union[node]);
+        }
+
+        public void merge2(int v1, int v2)
+        {
+            int head1 = find_head2(v1);
+            int head2 = find_head2(v2);
+            if (head1 == head2) return;
+            if (size_of_comp[head2] > size_of_comp[head1])
+            {
+                int x = head1;
+                head1 = head2;
+                head2 = x;
+            }
+
+            bool red = false, green = false, blue = false;
+            if (head_red[head1] == head_red[head2]) red = true;
+            if (head_blue[head1] == head_blue[head2]) blue = true;
+            if (head_green[head1] == head_green[head2]) green = true;
+
+            if (!red || !green || !blue) return;
+
+            union[head2] = head1;
+            size_of_comp[head1] += size_of_comp[head2];
+        }
+
+        public int calc_node(int i, int j)
+        {
+            return i * width + j;
+        }
+        public bool valid(int x, int y)
+        {
+            if (x > -1 && x < length && y > -1 && y < width) return true;
+            return false;
+
+        }
+
+        public void Execute()
+        {
+            int[] arr1 = { 1, 0, 0, -1, 1, -1, 1, -1 };
+            int[] arr2 = { 0, 1, -1, 0, -1, 1, 1, -1 };
+
+            for (int i = 0; i < length; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+
+                    for (int u = 0; u < 8; u++)
+                    {
+                        for (int v = 0; v < 8; v++)
+                        {
+                            int x = i + arr1[u];
+                            int y = j + arr2[v];
+                            if (valid(x, y))
+                            {
+                                int pixel1 = calc_node(i, j);
+                                int pixel2 = calc_node(x, y);
+                                merge2(pixel1, pixel2);
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < width * length; i++)
+            {
+                union[i] = find_head2(i);
+            }
+
+
+        }
+
+
+
+
+
+    }
     public class ImageOperations
     {
         /// <summary>
@@ -52,6 +231,12 @@ namespace ImageTemplate
         /// </summary>
         /// <param name="ImagePath">Image file path</param>
         /// <returns>2D array of colors</returns>
+        /// 
+        public static int calc_node(int i, int j, int n, int m)
+        {
+            return i * m + j;
+        }
+
         public static RGBPixel[,] OpenImage(string ImagePath)
         {
             Bitmap original_bm = new Bitmap(ImagePath);
@@ -131,6 +316,8 @@ namespace ImageTemplate
         {
             return ImageMatrix.GetLength(1);
         }
+
+
 
         /// <summary>
         /// Display the given image on the given PictureBox object
@@ -267,7 +454,7 @@ namespace ImageTemplate
         //static Dictionary<RGBPixel, List<RGBPixelD>> neighbours;
         //List<int> edges;
 
-        static Dictionary<(int,int), List<(int, int)>> neighbours = new Dictionary<(int,int), List<(int, int)>>();
+        static Dictionary<(int, int), List<(int, int)>> neighbours = new Dictionary<(int, int), List<(int, int)>>();
 
 
         /* static Dictionary<(int,int),  lIst<(int,int),Edge> > 
@@ -280,7 +467,7 @@ namespace ImageTemplate
          */
 
 
-        static Dictionary<(int, int), List<Edge>> Rededges = new Dictionary< (int, int), List<Edge> >();
+        static Dictionary<(int, int), List<Edge>> Rededges = new Dictionary<(int, int), List<Edge>>();
         static Dictionary<(int, int), List<Edge>> Blueedges = new Dictionary<(int, int), List<Edge>>();
         static Dictionary<(int, int), List<Edge>> Greenedges = new Dictionary<(int, int), List<Edge>>();
 
@@ -292,7 +479,7 @@ namespace ImageTemplate
             int image_width = GetWidth(Imagee);
 
 
-            Imagee = GaussianFilter1D(Imagee,5 , 0.8);
+            Imagee = GaussianFilter1D(Imagee, 5, 0.8);
 
 
             for (int i = 0; i < image_height; i++) // row by row
@@ -302,24 +489,24 @@ namespace ImageTemplate
                 {
                     RGBPixel pixel = new RGBPixel();
 
-                    pixel = Imagee[ i, j];
-                    
+                    pixel = Imagee[i, j];
 
-                    if (!neighbours.ContainsKey((i,j)))
-                        neighbours[(i,j)] = new List<(int,int)>();
 
-                   
+                    if (!neighbours.ContainsKey((i, j)))
+                        neighbours[(i, j)] = new List<(int, int)>();
+
+
 
                     if (i == 0 && j == 0)
                     {
-                        neighbours[(i,j)].Add((i, j+1 ));
-                        neighbours[(i,j)].Add((i+1, j));
-                        neighbours[(i,j)].Add((i + 1, j+1));
+                        neighbours[(i, j)].Add((i, j + 1));
+                        neighbours[(i, j)].Add((i + 1, j));
+                        neighbours[(i, j)].Add((i + 1, j + 1));
 
-                       
+
 
                     }
-                    else if (i == 0 && j == image_width-1)
+                    else if (i == 0 && j == image_width - 1)
                     {
                         neighbours[(i, j)].Add((i, j - 1));
                         neighbours[(i, j)].Add((i + 1, j));
@@ -328,75 +515,75 @@ namespace ImageTemplate
 
 
                     }
-                    else if (i == image_height - 1 && j == 0 )
+                    else if (i == image_height - 1 && j == 0)
                     {
                         neighbours[(i, j)].Add((i, j + 1));
                         neighbours[(i, j)].Add((i - 1, j));
                         neighbours[(i, j)].Add((i - 1, j + 1));
 
-                      
-
-
-                    }
-                    else if(i==image_height-1 && j==image_width-1)
-                    {
-                        neighbours[(i, j)].Add( (i, j - 1));
-                        neighbours[(i, j)].Add( (i - 1, j));
-                        neighbours[(i, j)].Add( (i - 1, j - 1));
-
-                      
-
-                    }
-                    else if(i == 0)
-                    {
-                        neighbours[(i, j)].Add( (i, j - 1));
-                        neighbours[(i, j)].Add( (i, j + 1));
-
-                        neighbours[(i, j)].Add( (i + 1, j));
-
-                        neighbours[(i, j)].Add( (i + 1, j - 1));
-                        neighbours[(i, j)].Add( (i + 1, j + 1));
-
-
-                      
-
-                    }
-                    else if (i == image_height-1)
-                    {
-                        neighbours[(i, j)].Add(( i, j - 1));
-                        neighbours[(i, j)].Add( (i, j + 1));
-
-                        neighbours[(i, j)].Add( (i - 1, j));
-
-                        neighbours[(i, j)].Add( (i - 1, j - 1));
-                        neighbours[(i, j)].Add(( i - 1, j + 1));
 
 
 
                     }
-                    else if (j == 0)
+                    else if (i == image_height - 1 && j == image_width - 1)
                     {
-                        neighbours[(i, j)].Add(( i-1, j ));
-                        neighbours[(i, j)].Add( (i+1 , j ));
+                        neighbours[(i, j)].Add((i, j - 1));
+                        neighbours[(i, j)].Add((i - 1, j));
+                        neighbours[(i, j)].Add((i - 1, j - 1));
 
-                        neighbours[(i, j)].Add( (i, j+1));
 
-                        neighbours[(i, j)].Add( (i - 1, j + 1));
+
+                    }
+                    else if (i == 0)
+                    {
+                        neighbours[(i, j)].Add((i, j - 1));
+                        neighbours[(i, j)].Add((i, j + 1));
+
+                        neighbours[(i, j)].Add((i + 1, j));
+
+                        neighbours[(i, j)].Add((i + 1, j - 1));
                         neighbours[(i, j)].Add((i + 1, j + 1));
 
 
 
 
                     }
-                    else if (j == image_width-1)
+                    else if (i == image_height - 1)
                     {
-                        neighbours[(i, j)].Add(( i - 1, j));
-                        neighbours[(i, j)].Add( (i + 1, j));
+                        neighbours[(i, j)].Add((i, j - 1));
+                        neighbours[(i, j)].Add((i, j + 1));
 
-                        neighbours[(i, j)].Add(( i, j - 1));
+                        neighbours[(i, j)].Add((i - 1, j));
 
-                        neighbours[(i, j)].Add( (i - 1, j - 1));
-                        neighbours[(i, j)].Add( (i + 1, j - 1));
+                        neighbours[(i, j)].Add((i - 1, j - 1));
+                        neighbours[(i, j)].Add((i - 1, j + 1));
+
+
+
+                    }
+                    else if (j == 0)
+                    {
+                        neighbours[(i, j)].Add((i - 1, j));
+                        neighbours[(i, j)].Add((i + 1, j));
+
+                        neighbours[(i, j)].Add((i, j + 1));
+
+                        neighbours[(i, j)].Add((i - 1, j + 1));
+                        neighbours[(i, j)].Add((i + 1, j + 1));
+
+
+
+
+                    }
+                    else if (j == image_width - 1)
+                    {
+                        neighbours[(i, j)].Add((i - 1, j));
+                        neighbours[(i, j)].Add((i + 1, j));
+
+                        neighbours[(i, j)].Add((i, j - 1));
+
+                        neighbours[(i, j)].Add((i - 1, j - 1));
+                        neighbours[(i, j)].Add((i + 1, j - 1));
 
 
 
@@ -404,21 +591,21 @@ namespace ImageTemplate
                     else
                     {
 
-                        neighbours[(i, j)].Add( (i + 1, j));
-                        neighbours[(i, j)].Add( (i - 1, j));
+                        neighbours[(i, j)].Add((i + 1, j));
+                        neighbours[(i, j)].Add((i - 1, j));
 
-                        neighbours[(i, j)].Add( (i, j - 1));
-                        neighbours[(i, j)].Add( (i , j + 1));
+                        neighbours[(i, j)].Add((i, j - 1));
+                        neighbours[(i, j)].Add((i, j + 1));
 
-                        neighbours[(i, j)].Add(( i - 1, j - 1));
-                        neighbours[(i, j)].Add( (i - 1, j+1));
+                        neighbours[(i, j)].Add((i - 1, j - 1));
+                        neighbours[(i, j)].Add((i - 1, j + 1));
 
-                        neighbours[(i, j)].Add(( i + 1, j + 1));
-                        neighbours[(i, j)].Add( (i+1, j - 1));
+                        neighbours[(i, j)].Add((i + 1, j + 1));
+                        neighbours[(i, j)].Add((i + 1, j - 1));
 
 
 
-                     
+
 
                     }
 
@@ -433,10 +620,16 @@ namespace ImageTemplate
 
         }
 
+        static List<Tuple<double, int, int>> list_red = new List<Tuple<double, int, int>>();
+        static List<Tuple<double, int, int>> list_green = new List<Tuple<double, int, int>>();
+        static List<Tuple<double, int, int>> list_blue = new List<Tuple<double, int, int>>();
+
         public static void calcEdges(string ImagePath)
         {
             RGBPixel[,] Image = calc_neighbours(ImagePath);
-            
+            int lenght = Image.GetLength(0);
+            int width = Image.GetLength(1);
+
             /*
              * A---> B,c
              * B--> A,D
@@ -452,9 +645,11 @@ namespace ImageTemplate
              */
 
 
+
+
             foreach (var pixel in neighbours) //access key of Main pixel 
             {
-                int i = pixel.Key.Item1; 
+                int i = pixel.Key.Item1;
                 int j = pixel.Key.Item2;
 
                 foreach (var neighbor in pixel.Value)  // access item in each list 
@@ -462,7 +657,8 @@ namespace ImageTemplate
                     int ni = neighbor.Item1;  // neighbour i
                     int nj = neighbor.Item2;  // neighbour j
 
-                    if(Rededges.ContainsKey((ni,nj))) // to avoid store edge twice 
+                    // you make it a directed graph 
+                    if (Rededges.ContainsKey((ni, nj))) // to avoid store edge twice 
                     {
                         continue;
                     }
@@ -480,12 +676,65 @@ namespace ImageTemplate
                     double greenWeight = Math.Abs(Image[i, j].green - Image[ni, nj].green);
                     double blueWeight = Math.Abs(Image[i, j].blue - Image[ni, nj].blue);
 
-                    Rededges[(i,j)].Add(new Edge(i, j, ni, nj, redWeight));
+                    Rededges[(i, j)].Add(new Edge(i, j, ni, nj, redWeight));
                     Blueedges[(i, j)].Add(new Edge(i, j, ni, nj, greenWeight));
                     Greenedges[(i, j)].Add(new Edge(i, j, ni, nj, blueWeight));
+
+
+                    int new_node1 = calc_node(i, j, lenght, width);
+                    int new_node2 = calc_node(ni, nj, lenght, width);
+
+                    list_red.Add(Tuple.Create(redWeight, new_node1, new_node2));
+                    list_blue.Add(Tuple.Create(blueWeight, new_node1, new_node2));
+                    list_green.Add(Tuple.Create(greenWeight, new_node1, new_node2));
+                }
+
+
+            }
+
+        }
+        public static void get_regions(double k, string ImagePath) // k is a parameter
+        {
+            RGBPixel[,] Image = calc_neighbours(ImagePath);
+            int lenght = Image.GetLength(0);
+            int width = Image.GetLength(1);
+
+            list_red.Sort();
+            list_blue.Sort();
+            list_green.Sort();
+
+            DSU dsu_red = new DSU(k, lenght, width, list_red);
+            dsu_red.run_DSU();
+            // vector<vector<int>>comp
+
+            DSU dsu_blue = new DSU(k, lenght, width, list_green);
+            dsu_blue.run_DSU();
+
+            DSU dsu_green = new DSU(k, lenght, width, list_blue);
+            dsu_green.run_DSU();
+            Get_Intersection seg = new Get_Intersection(lenght, width, dsu_red.head, dsu_green.head, dsu_blue.head);
+            int[] head = seg.union;
+            Dictionary<int,List<Tuple<int,int>>> segments = new Dictionary<int, List<Tuple<int,int>>>();
+            Dictionary<int, int> count = new Dictionary<int,int>();
+
+            for (int i = 0; i < lenght; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    int pixel = calc_node(i, j, lenght, width);
+                    segments[head[pixel]].Add(Tuple.Create(i,j));
+                    count[pixel]++;
+                       
                 }
             }
+            List<int> comps = new List<int>();
+            foreach (int p in count.Values) comps.Add(p);
+             comps.Sort(); // sz: how many compounents and sz of each compounent
+            // in cout , get the comps out desecnding 
+
         }
+
+
 
     }
 }

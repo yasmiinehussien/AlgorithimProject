@@ -196,17 +196,16 @@ namespace ImageTemplate
 
                     for (int u = 0; u < 8; u++)
                     {
-                        for (int v = 0; v < 8; v++)
-                        {
+                       
                             int x = i + arr1[u];
-                            int y = j + arr2[v];
+                            int y = j + arr2[u];
                             if (valid(x, y))
                             {
                                 int pixel1 = calc_node(i, j);
                                 int pixel2 = calc_node(x, y);
                                 merge2(pixel1, pixel2);
                             }
-                        }
+                        
                     }
                 }
             }
@@ -713,6 +712,7 @@ namespace ImageTemplate
             DSU dsu_green = new DSU(k, lenght, width, list_blue);
             dsu_green.run_DSU();
             Get_Intersection seg = new Get_Intersection(lenght, width, dsu_red.head, dsu_green.head, dsu_blue.head);
+            seg.Execute();
             int[] head = seg.union;
             Dictionary<int,List<Tuple<int,int>>> segments = new Dictionary<int, List<Tuple<int,int>>>();
             Dictionary<int, int> count = new Dictionary<int,int>();
@@ -731,6 +731,31 @@ namespace ImageTemplate
             foreach (int p in count.Values) comps.Add(p);
              comps.Sort(); // sz: how many compounents and sz of each compounent
             // in cout , get the comps out desecnding 
+          /*  Dictionary<int, List<int>> segments = new Dictionary<int, List<int>>();
+
+
+             for(int i=0;i<lenght*width;i++)
+             {
+                 segments[head[i]].Add(i); // each i will go to its comp
+
+             }
+            Dictionary<int, List<Tuple<int, int>>> segments = new Dictionary<int, List<Tuple<int, int>>>();
+            for (int i = 0; i < lenght; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    int pixel = calc_node(i, j, lenght, width);
+                    segments[head[pixel]].Add(Tuple.Create(i, j));
+
+                }
+            }
+
+            List<int> comps = new List<int>();
+            foreach (List<Tuple<int, int>> p in segments.Values) comps.Add(p.Count);
+            comps.Sort();*/
+
+
+
 
         }
 

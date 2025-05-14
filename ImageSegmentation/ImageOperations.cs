@@ -9,8 +9,6 @@ using System.Security;
 using System.Xml.Schema;
 using System.Collections.Specialized;
 using System.Windows.Forms.VisualStyles;
-using System.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 ///Algorithms Project
 ///Intelligent Scissors
@@ -24,11 +22,11 @@ namespace ImageTemplate
     public struct RGBPixel
     {
         public byte red, green, blue;
-        public RGBPixel (byte Red, byte Green, byte Blue)
+        public RGBPixel(byte Red, byte Green, byte Blue)
         {
-            red= Red;
-            green= Green;
-            blue= Blue;
+            red = Red;
+            green = Green;
+            blue = Blue;
         }
     }
     public struct RGBPixelD
@@ -107,14 +105,12 @@ namespace ImageTemplate
 
             double thr1 = k / comp_size[head1];
             double thr2 = k / comp_size[head2];
-
-            if (weight > Math.Min(thr1, thr2) + Math.Max(internal_diff[head1], internal_diff[head2]))
-                return;            // head1 > head2
+            if (weight > Math.Min(thr1 + internal_diff[head1], thr2 + internal_diff[head2])) return;
+            // head1 > head2
             head[head2] = head1;
 
             comp_size[head1] += comp_size[head2];
-            internal_diff[head1] = Math.Max(internal_diff[head1], Math.Max(internal_diff[head2], weight));
-            ; // sorted
+            internal_diff[head1] = weight; // sorted
         }
 
         public void run_DSU()
@@ -157,7 +153,7 @@ namespace ImageTemplate
             for (int i = 0; i < n * m; i++)
             {
                 union[i] = i;
-                size_of_comp[i] = 1;
+                size_of_comp[i] = 0;
             }
         }
         public int find_head2(int node) // log (n*m)
@@ -500,153 +496,51 @@ namespace ImageTemplate
 
 
 
+
+
+
+
+
         public static RGBPixel[,] Visulaiztaion(RGBPixel[,] image)
         {
-            int length = image.GetLength(0);
+
+            int lenght = image.GetLength(0);
             int width = image.GetLength(1);
 
-            Dictionary<int, RGBPixel> regionColors = new Dictionary<int, RGBPixel>();
-
-            foreach (int head in count.Keys)
+            byte red, green, blue;
+            int index = 0;
+            foreach (Region x in count.Values)
             {
-                byte r = (byte)((head * 53) % 256);
-                byte g = (byte)((head * 97) % 256);
-                byte b = (byte)((head * 193) % 256);
+                red = (byte)(((index * 71) % 200) + 56);
+                green = (byte)(((index * 73) % 200) + 56);
+                blue = (byte)(((index * 79) % 200) + 56);
 
-                regionColors[head] = new RGBPixel(r, g, b);
+                x.color = new RGBPixel(red, green, blue);
+                index++;
             }
-
-            for (int i = 0; i < length; i++)
-            {
-                for (int j = 0; j < width; j++)
-                {
-                    int pixel = calc_node(i, j, length, width);
-                    int parent = Heads[pixel];
-                    image[i, j] = regionColors[parent];
-                }
-            }
-
-            return image;
-        }
-
-        public static void calcEdges(RGBPixel[,] Imagee)
-        {
-            RGBPixel[,] Image = calc_neighbours(Imagee);
-            int lenght = Image.GetLength(0);
-            int width = Image.GetLength(1);
-           
-            foreach (var pixel in neighbours) //access key of Main pixel 
-            {
-
-                int i = pixel.Key.Item1;
-                int j = pixel.Key.Item2;
-
-                Rededges[(i, j)] = new List<Edge>();  
-                Greenedges[(i, j)] = new List<Edge>();
-                Blueedges[(i, j)] = new List<Edge>();
-                foreach (var neighbor in pixel.Value)
-                {
-
-
-                    int ni = neighbor.Item1;  // neighbour i
-                    int nj = neighbor.Item2;  // neighbour j
-
-                    if (!Rededges.ContainsKey((i, j))) Rededges[(i, j)] = new List<Edge>();
-                    if (!Greenedges.ContainsKey((i, j))) Greenedges[(i, j)] = new List<Edge>();
-                    if (!Blueedges.ContainsKey((i, j))) Blueedges[(i, j)] = new List<Edge>();
-
-
-
-
-                    double redWeight = Math.Abs(Image[i, j].red - Image[ni, nj].red);
-                    double greenWeight = Math.Abs(Image[i, j].green - Image[ni, nj].green);
-                    double blueWeight = Math.Abs(Image[i, j].blue - Image[ni, nj].blue);
-
-                    Rededges[(i, j)].Add(new Edge(i, j, ni, nj, redWeight));
-                    Blueedges[(i, j)].Add(new Edge(i, j, ni, nj, blueWeight));
-                    Greenedges[(i, j)].Add(new Edge(i, j, ni, nj, greenWeight));
-
-
-                    // Combine into single weight (Euclidean distance) //modified
-                    double combinedWeight = Math.Sqrt(redWeight * redWeight +
-                                                    greenWeight * greenWeight +
-                                                    blueWeight * blueWeight);
-
-                    int node1 = calc_node(i, j, lenght, width);
-                    int node2 = calc_node(ni, nj, lenght, width);
-
-                    list_red.Add(Tuple.Create(combinedWeight, node1, node2));
-                    list_green.Add(Tuple.Create(combinedWeight, node1, node2));
-                    list_blue.Add(Tuple.Create(combinedWeight, node1, node2));
-                }
-
-
-            }
-
-
-        }
-
-        public static void get_regions(double k, RGBPixel[,] Image) // k is a parameter
-        {
-
-            int lenght = Image.GetLength(0);
-            int width = Image.GetLength(1);
-           
-
-            calcEdges(Image);
-            list_red.Sort();
-            list_blue.Sort();
-            list_green.Sort();
-
-            DSU dsu_red = new DSU(k, lenght, width, list_red);
-            dsu_red.run_DSU();
-            // vector<vector<int>>comp
-
-            DSU dsu_green = new DSU(k, lenght, width, list_green);
-            dsu_green.run_DSU();
-
-            DSU dsu_blue = new DSU(k, lenght, width, list_blue);
-            dsu_blue.run_DSU();
-
-
-            Get_Intersection seg = new Get_Intersection(lenght, width, dsu_red.head, dsu_green.head, dsu_blue.head);
-            seg.Execute();
-
-
-            Heads = seg.union;
-
 
             for (int i = 0; i < lenght; i++)
             {
                 for (int j = 0; j < width; j++)
                 {
+
                     int pixel = calc_node(i, j, lenght, width);
-                    int head = Heads[pixel];
+                    int parent = Heads[pixel];
+                    image[i, j] = count[parent].color;
 
-                    if (!segments.ContainsKey(head))
-                    {
-                        segments[head] = new List<Tuple<int, int>>();
-                        count[head] = new Region() { count = 0 };
-                    }
 
-                    segments[head].Add(Tuple.Create(i, j));
-                    count[head].count++;
                 }
             }
-
-
-            comps = count.Values.Select(r => r.count).OrderByDescending(c => c).ToList();
-
-
-
+            return image;
         }
+
         public static RGBPixel[,] calc_neighbours(RGBPixel[,] Imagee)
         {
             int image_height = GetHeight(Imagee);
             int image_width = GetWidth(Imagee);
 
 
-           Imagee = GaussianFilter1D(Imagee, 5, 0.8);
+            //  Imagee = GaussianFilter1D(Imagee, 5, 0.8);
 
 
             for (int i = 0; i < image_height; i++) // row by row
@@ -654,6 +548,9 @@ namespace ImageTemplate
 
                 for (int j = 0; j < image_width; j++)
                 {
+                    RGBPixel pixel = new RGBPixel();
+
+                    pixel = Imagee[i, j];
 
 
                     if (!neighbours.ContainsKey((i, j)))
@@ -783,8 +680,161 @@ namespace ImageTemplate
 
 
         }
+        public static void calcEdges(RGBPixel[,] Imagee)
+        {
+            RGBPixel[,] Image = calc_neighbours(Imagee);
+            int lenght = Image.GetLength(0);
+            int width = Image.GetLength(1);
 
-       
+            /*
+             * A---> B,c
+             * B--> A,D
+             * 
+             * 
+             * content Edges
+             * A--> B,c
+             * 
+             * 
+             * 
+             * 
+             * 
+             */
+
+
+
+
+            foreach (var pixel in neighbours) //access key of Main pixel 
+            {
+                int i = pixel.Key.Item1;
+                int j = pixel.Key.Item2;
+
+                foreach (var neighbor in pixel.Value)  // access item in each list 
+                {
+                    int ni = neighbor.Item1;  // neighbour i
+                    int nj = neighbor.Item2;  // neighbour j
+
+                    // you make it a directed graph 
+                    if (Rededges.ContainsKey((ni, nj))) // to avoid store edge twice 
+                    {
+                        continue;
+                    }
+
+
+                    if (!Rededges.ContainsKey((i, j)))
+                    {
+                        Rededges[(i, j)] = new List<Edge>();
+                        Greenedges[(i, j)] = new List<Edge>();
+                        Blueedges[(i, j)] = new List<Edge>();
+                    }
+
+
+                    double redWeight = Math.Abs(Image[i, j].red - Image[ni, nj].red);
+                    double greenWeight = Math.Abs(Image[i, j].green - Image[ni, nj].green);
+                    double blueWeight = Math.Abs(Image[i, j].blue - Image[ni, nj].blue);
+
+                    Rededges[(i, j)].Add(new Edge(i, j, ni, nj, redWeight));
+                    Blueedges[(i, j)].Add(new Edge(i, j, ni, nj, greenWeight));
+                    Greenedges[(i, j)].Add(new Edge(i, j, ni, nj, blueWeight));
+
+
+                    int new_node1 = calc_node(i, j, lenght, width);
+                    int new_node2 = calc_node(ni, nj, lenght, width);
+
+                    list_red.Add(Tuple.Create(redWeight, new_node1, new_node2));
+                    list_blue.Add(Tuple.Create(blueWeight, new_node1, new_node2));
+                    list_green.Add(Tuple.Create(greenWeight, new_node1, new_node2));
+                }
+
+
+            }
+
+        }
+
+        public static void get_regions(double k, RGBPixel[,] Image) // k is a parameter
+        {
+
+
+            int lenght = Image.GetLength(0);
+            int width = Image.GetLength(1);
+            calcEdges(Image);
+            list_red.Sort();
+            list_blue.Sort();
+            list_green.Sort();
+
+            DSU dsu_red = new DSU(k, lenght, width, list_red);
+            dsu_red.run_DSU();
+            // vector<vector<int>>comp
+
+            DSU dsu_blue = new DSU(k, lenght, width, list_green);
+            dsu_blue.run_DSU();
+
+            DSU dsu_green = new DSU(k, lenght, width, list_blue);
+            dsu_green.run_DSU();
+
+
+
+            Get_Intersection seg = new Get_Intersection(lenght, width, dsu_red.head, dsu_green.head, dsu_blue.head);
+            seg.Execute();
+
+
+            Heads = seg.union;
+
+
+            for (int i = 0; i < lenght; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    int pixel = calc_node(i, j, lenght, width);
+                    //count[pixel]++;
+                    int head = Heads[pixel];
+                    if (!segments.ContainsKey(head))
+                    {
+                        segments[head] = new List<Tuple<int, int>>();
+                    }
+                    if (!count.ContainsKey(head))
+                    {
+                        count[head] = new Region(); // or new Region { count = 0 } if needed
+                    }
+
+                    segments[head].Add(Tuple.Create(i, j));
+                    count[head].count++;
+                }
+            }
+
+            foreach (Region p in count.Values) comps.Add(p.count);
+            comps.Sort(); // sz: how many compounents and sz of each compounent
+            comps.Reverse();  // in cout , get the comps out desecnding 
+            /*  Dictionary<int, List<int>> segments = new Dictionary<int, List<int>>();
+
+
+               for(int i=0;i<lenght*width;i++)
+               {
+                   segments[head[i]].Add(i); // each i will go to its comp
+
+               }
+              Dictionary<int, List<Tuple<int, int>>> segments = new Dictionary<int, List<Tuple<int, int>>>();
+              for (int i = 0; i < lenght; i++)
+              {
+                  for (int j = 0; j < width; j++)
+                  {
+                      int pixel = calc_node(i, j, lenght, width);
+                      segments[head[pixel]].Add(Tuple.Create(i, j));
+
+                  }
+              }
+
+              List<int> comps = new List<int>();
+              foreach (List<Tuple<int, int>> p in segments.Values) comps.Add(p.Count);
+              comps.Sort();*/
+
+
+
+
+
+
+
+
+        }
 
 
 

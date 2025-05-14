@@ -75,16 +75,18 @@ namespace ImageTemplate
 
             Stopwatch timer = Stopwatch.StartNew();
 
-            ImageOperations.get_regions(20, ImageMatrix);
+            ImageOperations.get_regions(30000, ImageMatrix);
 
             RGBPixel[,] ColoredImage = ImageOperations.Visulaiztaion(ImageMatrix);
 
             timer.Stop();
             long time = timer.ElapsedMilliseconds;
+
             write_in_file();
             ImageOperations.DisplayImage(ColoredImage, pictureBox2);
+            MessageBox.Show($"Execution Time: {time} ms", "Processing Time", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        
+
     }
 }

@@ -280,8 +280,7 @@ namespace ImageTemplate
         static Dictionary<(int, int), List<(int, int)>> neighbours = new Dictionary<(int, int), List<(int, int)>>();
 
         static Dictionary<(int, int), List<Edge>> Rededges = new Dictionary<(int, int), List<Edge>>();
-        static Dictionary<(int, int), List<Edge>> Blueedges = new Dictionary<(int, int), List<Edge>>();
-        static Dictionary<(int, int), List<Edge>> Greenedges = new Dictionary<(int, int), List<Edge>>();
+       
         public static int calc_node(int i, int j, int n, int m)
         {
             return i * m + j;
@@ -711,8 +710,7 @@ namespace ImageTemplate
                     if (!Rededges.ContainsKey((i, j)))
                     {
                         Rededges[(i, j)] = new List<Edge>();
-                        Greenedges[(i, j)] = new List<Edge>();
-                        Blueedges[(i, j)] = new List<Edge>();
+                       
                     }
 
 
@@ -721,9 +719,7 @@ namespace ImageTemplate
                     double blueWeight = Math.Abs(Image[i, j].blue - Image[ni, nj].blue);
 
                     Rededges[(i, j)].Add(new Edge(i, j, ni, nj, redWeight));
-                    Blueedges[(i, j)].Add(new Edge(i, j, ni, nj, greenWeight));
-                    Greenedges[(i, j)].Add(new Edge(i, j, ni, nj, blueWeight));
-
+                   
 
                     int new_node1 = calc_node(i, j, lenght, width);
                     int new_node2 = calc_node(ni, nj, lenght, width);

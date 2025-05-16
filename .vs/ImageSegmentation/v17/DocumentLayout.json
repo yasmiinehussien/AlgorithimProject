@@ -1,25 +1,25 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\malak\\Music\\[TEMPLATE] ImageSegmentation\\",
+  "WorkspaceRootPath": "G:\\Algorithim\\[TEMPLATE] ImageSegmentation\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|c:\\users\\malak\\music\\[template] imagesegmentation\\imagesegmentation\\imageoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|solutionrelative:imagesegmentation\\imageoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|C:\\Users\\malak\\Music\\[TEMPLATE] ImageSegmentation\\imagesegmentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|solutionrelative:imagesegmentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|C:\\Users\\malak\\Music\\[TEMPLATE] ImageSegmentation\\imagesegmentation\\ouroutput.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|solutionrelative:imagesegmentation\\ouroutput.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|C:\\Users\\malak\\Music\\[TEMPLATE] ImageSegmentation\\imagesegmentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|G:\\Algorithim\\[TEMPLATE] ImageSegmentation\\imagesegmentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|solutionrelative:imagesegmentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|C:\\Users\\malak\\Music\\[TEMPLATE] ImageSegmentation\\imagesegmentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|G:\\Algorithim\\[TEMPLATE] ImageSegmentation\\imagesegmentation\\imageoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|solutionrelative:imagesegmentation\\imageoperations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|g:\\algorithim\\[template] imagesegmentation\\imagesegmentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|solutionrelative:imagesegmentation\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|G:\\Algorithim\\[TEMPLATE] ImageSegmentation\\imagesegmentation\\ouroutput.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|solutionrelative:imagesegmentation\\ouroutput.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|G:\\Algorithim\\[TEMPLATE] ImageSegmentation\\imagesegmentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7CA8077F-C27A-400D-B6C9-7737665499AC}|ImageSegmentation\\ImageSegmentation.csproj|solutionrelative:imagesegmentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,60 +38,63 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "OurOutput.txt",
-              "DocumentMoniker": "C:\\Users\\malak\\Music\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\OurOutput.txt",
+              "DocumentMoniker": "G:\\Algorithim\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\OurOutput.txt",
               "RelativeDocumentMoniker": "ImageSegmentation\\OurOutput.txt",
-              "ToolTip": "C:\\Users\\malak\\Music\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\OurOutput.txt",
+              "ToolTip": "G:\\Algorithim\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\OurOutput.txt",
               "RelativeToolTip": "ImageSegmentation\\OurOutput.txt",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAEAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABlQAgACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-05-12T17:51:51.65Z"
+              "WhenOpened": "2025-05-12T17:51:51.65Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MainForm.cs",
-              "DocumentMoniker": "C:\\Users\\malak\\Music\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\MainForm.cs",
+              "DocumentMoniker": "G:\\Algorithim\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\MainForm.cs",
               "RelativeDocumentMoniker": "ImageSegmentation\\MainForm.cs",
-              "ToolTip": "C:\\Users\\malak\\Music\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\MainForm.cs",
+              "ToolTip": "G:\\Algorithim\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\MainForm.cs",
               "RelativeToolTip": "ImageSegmentation\\MainForm.cs",
-              "ViewState": "AQIAAD4AAAAAAAAAAAAgwEkAAAA2AAAA",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAiwFEAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T20:18:28.912Z"
+              "WhenOpened": "2025-04-30T20:18:28.912Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\malak\\Music\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\Program.cs",
+              "DocumentMoniker": "G:\\Algorithim\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\Program.cs",
               "RelativeDocumentMoniker": "ImageSegmentation\\Program.cs",
-              "ToolTip": "C:\\Users\\malak\\Music\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\Program.cs",
+              "ToolTip": "G:\\Algorithim\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\Program.cs",
               "RelativeToolTip": "ImageSegmentation\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAFAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-30T16:48:55.703Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "MainForm.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\malak\\Music\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\MainForm.cs",
+              "DocumentMoniker": "G:\\Algorithim\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\MainForm.cs",
               "RelativeDocumentMoniker": "ImageSegmentation\\MainForm.cs",
-              "ToolTip": "C:\\Users\\malak\\Music\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\MainForm.cs [Design]",
+              "ToolTip": "G:\\Algorithim\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\MainForm.cs [Design]",
               "RelativeToolTip": "ImageSegmentation\\MainForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-30T16:48:50.959Z"
+              "WhenOpened": "2025-04-30T16:48:50.959Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ImageOperations.cs",
-              "DocumentMoniker": "C:\\Users\\malak\\Music\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\ImageOperations.cs",
+              "DocumentMoniker": "G:\\Algorithim\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\ImageOperations.cs",
               "RelativeDocumentMoniker": "ImageSegmentation\\ImageOperations.cs",
-              "ToolTip": "C:\\Users\\malak\\Music\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\ImageOperations.cs",
+              "ToolTip": "G:\\Algorithim\\[TEMPLATE] ImageSegmentation\\ImageSegmentation\\ImageOperations.cs",
               "RelativeToolTip": "ImageSegmentation\\ImageOperations.cs",
-              "ViewState": "AQIAAAUCAAAAAAAAAAAiwBMCAAARAAAA",
+              "ViewState": "AgIAACwBAAAAAAAAAAAvwNYCAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-30T16:48:10.636Z",
               "EditorCaption": ""

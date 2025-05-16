@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
+using System.Threading.Tasks;
 
 namespace ImageTemplate
 {
@@ -21,38 +22,34 @@ namespace ImageTemplate
 
         RGBPixel[,] ImageMatrix;
 
-        string filePath = @"C:\Users\malak\Music\[TEMPLATE] ImageSegmentation\ImageSegmentation\OurOutput.txt";
-        public void write_in_file()
+        string filePath = @"G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\OurOutput.txt";
+        public void write_in_file(List<int> comps)
         {
-
             try
             {
                 using (StreamWriter writer = new StreamWriter(filePath))
                 {
-                    writer.WriteLine($" {ImageOperations.comps.Count}");
-                    writer.WriteLine(); 
+                    writer.WriteLine($" {comps.Count}");
+                    writer.WriteLine();
 
-                    // Write sizes of each segment, sorted in descending order
-                    foreach (int x in ImageOperations.comps)
+                    foreach (int x in comps)
                     {
                         writer.WriteLine($" {x}");
                     }
 
-
                     Console.WriteLine($"Segmentation report saved to: {filePath}");
-
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Error writing report: {e.Message}");
             }
-
         }
 
 
 
- 
+
+
         private void btnOpen_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -67,25 +64,45 @@ namespace ImageTemplate
             txtHeight.Text = ImageOperations.GetHeight(ImageMatrix).ToString();
         }
 
-        private void btnGaussSmooth_Click(object sender, EventArgs e)
+        private async void btnGaussSmooth_Click(object sender, EventArgs e)
         {
             double sigma = double.Parse(txtGaussSigma.Text);
-            int maskSize = (int)nudMaskSize.Value ;
-            ImageMatrix = ImageOperations.GaussianFilter1D(ImageMatrix, maskSize, sigma);
+            int maskSize = (int)nudMaskSize.Value;
 
             Stopwatch timer = Stopwatch.StartNew();
 
-            ImageOperations.get_regions(30000, ImageMatrix);
+            RGBPixel[,] resultImage = null;
+            List<int> compsCopy = null;
 
-            RGBPixel[,] ColoredImage = ImageOperations.Visulaiztaion(ImageMatrix);
+            try
+            {
+                await Task.Run(() =>
+                {
+                    ImageMatrix = ImageOperations.GaussianFilter1D(ImageMatrix, maskSize, sigma);
+                    ImageOperations.get_regions(35000, ImageMatrix);
+                    resultImage = ImageOperations.Visulaiztaion(ImageMatrix);
+                    compsCopy = new List<int>(ImageOperations.comps);
+                });
+            }
+            catch (OutOfMemoryException)
+            {
+                MessageBox.Show("?? Out of Memory!\nTry using a smaller image or lower value of k.", "Memory Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
 
             timer.Stop();
             long time = timer.ElapsedMilliseconds;
 
-            write_in_file();
-            ImageOperations.DisplayImage(ColoredImage, pictureBox2);
+            // Save results to file
+            write_in_file(compsCopy);
+
+            // Display final image on pictureBox2
+            ImageOperations.DisplayImage(resultImage, pictureBox2);
+
             MessageBox.Show($"Execution Time: {time} ms", "Processing Time", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
 
     }

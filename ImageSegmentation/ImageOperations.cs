@@ -9,6 +9,8 @@ using System.Security;
 using System.Xml.Schema;
 using System.Collections.Specialized;
 using System.Windows.Forms.VisualStyles;
+using System.Threading.Tasks;
+using System.Linq;
 
 ///Algorithms Project
 ///Intelligent Scissors
@@ -74,13 +76,14 @@ namespace ImageTemplate
 
             internal_diff = new double[n * m];
 
-            for (int i = 0; i < n * m; i++)
+            //modified
+            int total = n * m;
+            Parallel.For(0, total, i =>
             {
                 head[i] = i;
-
                 comp_size[i] = 1;
                 internal_diff[i] = 0;
-            }
+            });
         }
 
         public int find_head(int node) // log (n*m)
@@ -120,10 +123,11 @@ namespace ImageTemplate
             {
                 merge(list[i].Item1, list[i].Item2, list[i].Item3);
             }
-            for (int i = 0; i < width * lenght; i++)
+            //modified
+            Parallel.For(0, head.Length, i =>
             {
                 head[i] = find_head(i);
-            }
+            });
         }
 
 
@@ -150,11 +154,13 @@ namespace ImageTemplate
 
             size_of_comp = new int[n * m];
 
-            for (int i = 0; i < n * m; i++)
+            //modified
+            int total = n * m;
+            Parallel.For(0, total, i =>
             {
                 union[i] = i;
-                size_of_comp[i] = 0;
-            }
+                size_of_comp[i] = 1;
+            });
         }
         public int find_head2(int node) // log (n*m)
         {
@@ -201,11 +207,12 @@ namespace ImageTemplate
         {
             int[] arr1 = { 1, 0, 0, -1, 1, -1, 1, -1 };
             int[] arr2 = { 0, 1, -1, 0, -1, 1, 1, -1 };
-
-            for (int i = 0; i < length; i++)
+            //modified
+            Parallel.For(0, length, i =>
             {
                 for (int j = 0; j < width; j++)
                 {
+                    int current = i * width + j;
 
                     for (int u = 0; u < 8; u++)
                     {
@@ -221,12 +228,15 @@ namespace ImageTemplate
 
                     }
                 }
-            }
+            });
 
-            for (int i = 0; i < width * length; i++)
+
+
+            //modified
+            Parallel.For(0, union.Length, i =>
             {
                 union[i] = find_head2(i);
-            }
+            });
 
 
         }
@@ -503,34 +513,30 @@ namespace ImageTemplate
 
         public static RGBPixel[,] Visulaiztaion(RGBPixel[,] image)
         {
-
-            int lenght = image.GetLength(0);
+            int length = image.GetLength(0);
             int width = image.GetLength(1);
 
-            byte red, green, blue;
+            var colors = new Dictionary<int, RGBPixel>();
             int index = 0;
-            foreach (Region x in count.Values)
+            foreach (var regionId in count.Keys)
             {
-                red = (byte)(((index * 71) % 200) + 56);
-                green = (byte)(((index * 73) % 200) + 56);
-                blue = (byte)(((index * 79) % 200) + 56);
-
-                x.color = new RGBPixel(red, green, blue);
+                byte red = (byte)(((index * 71) % 200) + 56);
+                byte green = (byte)(((index * 73) % 200) + 56);
+                byte blue = (byte)(((index * 79) % 200) + 56);
+                colors[regionId] = new RGBPixel(red, green, blue);
                 index++;
             }
-
-            for (int i = 0; i < lenght; i++)
+            //modified
+            Parallel.For(0, length, i =>
             {
                 for (int j = 0; j < width; j++)
                 {
-
-                    int pixel = calc_node(i, j, lenght, width);
+                    int pixel = i * width + j;
                     int parent = Heads[pixel];
-                    image[i, j] = count[parent].color;
-
-
+                    image[i, j] = colors[parent];
                 }
-            }
+            });
+
             return image;
         }
 
@@ -686,23 +692,6 @@ namespace ImageTemplate
             int lenght = Image.GetLength(0);
             int width = Image.GetLength(1);
 
-            /*
-             * A---> B,c
-             * B--> A,D
-             * 
-             * 
-             * content Edges
-             * A--> B,c
-             * 
-             * 
-             * 
-             * 
-             * 
-             */
-
-
-
-
             foreach (var pixel in neighbours) //access key of Main pixel 
             {
                 int i = pixel.Key.Item1;
@@ -754,37 +743,46 @@ namespace ImageTemplate
         {
 
 
-            int lenght = Image.GetLength(0);
+            int length = Image.GetLength(0);
             int width = Image.GetLength(1);
             calcEdges(Image);
-            list_red.Sort();
-            list_blue.Sort();
-            list_green.Sort();
+            //modified
+            Parallel.Invoke(
+           () => list_red.Sort(),
+           () => list_blue.Sort(),
+           () => list_green.Sort()
+       );
 
-            DSU dsu_red = new DSU(k, lenght, width, list_red);
-            dsu_red.run_DSU();
-            // vector<vector<int>>comp
+            DSU dsu_red = null, dsu_blue=null, dsu_green = null;
+            //modified
+            Parallel.Invoke(
+                () => {
+                    dsu_red = new DSU(k, length, width, list_red);
+                    dsu_red.run_DSU();
+                },
+                () => {
+                    dsu_blue = new DSU(k, length, width, list_blue);
+                    dsu_blue.run_DSU();
+                },
+                () => {
+                    dsu_green = new DSU(k, length, width, list_green);
+                    dsu_green.run_DSU();
+                }
+            );
 
-            DSU dsu_blue = new DSU(k, lenght, width, list_green);
-            dsu_blue.run_DSU();
 
-            DSU dsu_green = new DSU(k, lenght, width, list_blue);
-            dsu_green.run_DSU();
-
-
-
-            Get_Intersection seg = new Get_Intersection(lenght, width, dsu_red.head, dsu_green.head, dsu_blue.head);
+            Get_Intersection seg = new Get_Intersection(length, width, dsu_red.head, dsu_green.head, dsu_blue.head);
             seg.Execute();
 
 
             Heads = seg.union;
 
 
-            for (int i = 0; i < lenght; i++)
+            for (int i = 0; i < length; i++)
             {
                 for (int j = 0; j < width; j++)
                 {
-                    int pixel = calc_node(i, j, lenght, width);
+                    int pixel = calc_node(i, j, length, width);
                     //count[pixel]++;
                     int head = Heads[pixel];
                     if (!segments.ContainsKey(head))
@@ -802,37 +800,11 @@ namespace ImageTemplate
             }
 
             foreach (Region p in count.Values) comps.Add(p.count);
-            comps.Sort(); // sz: how many compounents and sz of each compounent
-            comps.Reverse();  // in cout , get the comps out desecnding 
-            /*  Dictionary<int, List<int>> segments = new Dictionary<int, List<int>>();
-
-
-               for(int i=0;i<lenght*width;i++)
-               {
-                   segments[head[i]].Add(i); // each i will go to its comp
-
-               }
-              Dictionary<int, List<Tuple<int, int>>> segments = new Dictionary<int, List<Tuple<int, int>>>();
-              for (int i = 0; i < lenght; i++)
-              {
-                  for (int j = 0; j < width; j++)
-                  {
-                      int pixel = calc_node(i, j, lenght, width);
-                      segments[head[pixel]].Add(Tuple.Create(i, j));
-
-                  }
-              }
-
-              List<int> comps = new List<int>();
-              foreach (List<Tuple<int, int>> p in segments.Values) comps.Add(p.Count);
-              comps.Sort();*/
-
-
-
-
-
-
-
+            //modified
+            comps = count.Values.AsParallel()
+                       .Select(p => p.count)
+                       .OrderByDescending(c => c)
+                       .ToList();
 
         }
 

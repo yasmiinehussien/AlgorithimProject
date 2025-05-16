@@ -516,24 +516,23 @@ namespace ImageTemplate
             int length = image.GetLength(0);
             int width = image.GetLength(1);
 
-            var colors = new Dictionary<int, RGBPixel>();
-            int index = 0;
-            foreach (var regionId in count.Keys)
+            // modified
+            Parallel.ForEach(count.Values, (region, state, index) =>
             {
                 byte red = (byte)(((index * 71) % 200) + 56);
                 byte green = (byte)(((index * 73) % 200) + 56);
                 byte blue = (byte)(((index * 79) % 200) + 56);
-                colors[regionId] = new RGBPixel(red, green, blue);
-                index++;
-            }
-            //modified
+                region.color = new RGBPixel(red, green, blue);
+            });
+
+            // modified
             Parallel.For(0, length, i =>
             {
                 for (int j = 0; j < width; j++)
                 {
                     int pixel = i * width + j;
                     int parent = Heads[pixel];
-                    image[i, j] = colors[parent];
+                    image[i, j] = count[parent].color;
                 }
             });
 

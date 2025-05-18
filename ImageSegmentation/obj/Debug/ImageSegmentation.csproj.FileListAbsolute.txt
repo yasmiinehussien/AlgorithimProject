@@ -9,16 +9,6 @@ D:\[COURSES]\Algorithms\[ALG'24.term2]\Staff\10 Project\RELEASE\[1] Image Encryp
 D:\[COURSES]\Algorithms\[ALG'24.term2]\Staff\10 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageSegmentation.csproj.CoreCompileInputs.cache
 D:\[COURSES]\Algorithms\[ALG'24.term2]\Staff\10 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageTemplate.exe
 D:\[COURSES]\Algorithms\[ALG'24.term2]\Staff\10 Project\RELEASE\[1] Image Encryption and Compression\Startup Code\[TEMPLATE] ImageEncryptCompress\ImageEncryptCompress\obj\Debug\ImageTemplate.pdb
-G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageSegmentation.csproj.AssemblyReference.cache
-G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageTemplate.MainForm.resources
-G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageTemplate.Properties.Resources.resources
-G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageSegmentation.csproj.GenerateResource.cache
-G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageSegmentation.csproj.CoreCompileInputs.cache
-G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageTemplate.exe
-G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageTemplate.pdb
-G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\bin\Debug\ImageTemplate.exe.config
-G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\bin\Debug\ImageTemplate.exe
-G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\bin\Debug\ImageTemplate.pdb
 C:\Users\malak\Music\[TEMPLATE] ImageSegmentation\ImageSegmentation\bin\Debug\ImageTemplate.exe.config
 C:\Users\malak\Music\[TEMPLATE] ImageSegmentation\ImageSegmentation\bin\Debug\ImageTemplate.exe
 C:\Users\malak\Music\[TEMPLATE] ImageSegmentation\ImageSegmentation\bin\Debug\ImageTemplate.pdb
@@ -29,3 +19,13 @@ C:\Users\malak\Music\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\Im
 C:\Users\malak\Music\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageSegmentation.csproj.CoreCompileInputs.cache
 C:\Users\malak\Music\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageTemplate.exe
 C:\Users\malak\Music\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageTemplate.pdb
+G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\bin\Debug\ImageTemplate.exe.config
+G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\bin\Debug\ImageTemplate.exe
+G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\bin\Debug\ImageTemplate.pdb
+G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageSegmentation.csproj.AssemblyReference.cache
+G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageTemplate.MainForm.resources
+G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageTemplate.Properties.Resources.resources
+G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageSegmentation.csproj.GenerateResource.cache
+G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageSegmentation.csproj.CoreCompileInputs.cache
+G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageTemplate.exe
+G:\Algorithim\[TEMPLATE] ImageSegmentation\ImageSegmentation\obj\Debug\ImageTemplate.pdb
